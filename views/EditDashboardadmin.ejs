@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<script> 
+  const cookieSession = require('cookie-session');
+  const bcrypt = require('bcrypt');
+  const dbConnection = require('./views/database');
+  const session = require('express-session')
+  let id = 0
+  </script>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bxl-c-plus-plus icon'></i>
+        <a class="logo_name" href="/Dashboardadmin" >Activity</a>
+        <i class='bx bx-menu' id="btn" ></i>
+    </div>
+    <ul class="nav-list">
+      <li>
+          <i class='bx bx-search' ></i>
+         <input type="text" placeholder="Search...">
+         <span class="tooltip">Search</span>
+      </li>
+      <li>
+        <a href="/Dashboardadmin">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name">Dashboard</span>
+        </a>
+         <span class="tooltip">Dashboard</span>
+      </li>
+      <li>
+       <a href="/Dashboardadmin">
+         <i class='bx bx-user' ></i>
+         <span class="links_name">ย้อนกลับ</span>
+       </a>
+       <span class="tooltip">ย้อนกลับ</span>
+     </li>
+     <li>
+
+     <li class="profile">
+         <div class="profile-details">
+           <img src="/photos/Logo.png" alt="profileImg">
+           <div class="name_job">
+             <div class="name"><%if (user){%> <h5><%=user.name%></h5><%}%></div>
+             <div class="job">มหาวิทยาลัยพะเยา</div>
+           </div>
+         </div>
+        <a href="/users/logout" class="btn btn-danger">
+         <i class='bx bx-log-out' id="log_out" ></i>
+        </a>
+     </li>
+    </ul>
+  </div>
+  <section class="home-section">
+      <div class="text" >Dashboard Admin </div> 
+
+        <table>
+            <tr>
+              <th>รายชื่อกิจกรรม</th>
+              <th>เวลา</th>
+              <th>วันที่</th>
+              <th>สถานที่</th>
+              <th>ชั่วโมงกิจกรรม</th>
+              
+            </tr>
+            <tr><% data.forEach(function(data){%>
+              <td><%=data.ActivityName %> </td>
+              <td><%=data.startTime %> - <%=data.endTime %> </td>
+              <td><%=data.date %> </td>
+              <td><%=data.place %> </td>
+              <td><%=data.score %> </td>
+              <td><form method="post" action="/delete/<%= data.No %>"><button class='button' type="submit">ลบกิจกรรม</button></form><td>
+              <td><a class='button' href="/update">แก้ไขกิจกรรม</a></td>
+              
+            </tr><% });%>
+          </table>
+        <div>
+        </div></br>
+    <section class="grid-item  delete">
+      <form action="/delete" method="post">
+        <h4> ลบกิจกรรม</h4>
+          <div class="input">
+            <div class="input">
+              <label for="id">ลำดับ</label>
+              <input type="text" id="id" name="id">
+          </div>
+         <a class="button " href="/insert">สร้างกิจกรรม</a>
+         
+         <button class='button' type="submit" onclick="return confirm('คุณยืนยันที่จะลบหรือไม่');">ลบกิจกรรม</button>
+         </form>
+      </section>
+    
+</section> 
+
+  <script>
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let searchBtn = document.querySelector(".bx-search");
+
+  closeBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("open");
+    menuBtnChange();//calling the function(optional)
+  });
+
+  searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
+    sidebar.classList.toggle("open");
+    menuBtnChange(); //calling the function(optional)
+  });
+
+  // following are the code to change sidebar button(optional)
+  function menuBtnChange() {
+   if(sidebar.classList.contains("open")){
+     closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+   }else {
+     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
+   }
+  }
+
+  async function deleteBtn() {
+    alert("xxx")
+    const client = new MongoClient(uri);
+    await client.connect();
+    const users = await client.db('LoginDB').collection('data').deleteOne({No: id})
+  } 
+
+  </script>
+</body>
+</html>

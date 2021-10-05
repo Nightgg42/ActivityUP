@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+input[type=text], select, textarea {
+  width: 50%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+</style>
+</head>
+<body>
+
+<section class="grid-item  update">
+          <h3>แก้ไขกิจกรรม</h3>
+          <form action="/update" method="POST">
+              <div class="input">
+                  <label for="id">ID</label>
+                  <input type="text" id="id" name="id">
+              </div></br>
+              <div class="input">
+                  <label for="ActivityName">รายชื่อกิจกรรม</label>
+                  <input type="text" id="ActivityName" name="ActivityName">
+              </div></br>
+              <div class="input">
+                  <label for="time">เวลา</label>
+                  <input type="text" id="time" name="time">
+              </div></br>
+              <div class="input">
+                  <label for="date">วันที่</label>
+                  <input type="text" id="date" name="date">
+              </div></br>
+              <div class="input">
+                <label for="place">สถานที่</label>
+                <input type="text" id="place" name="place">
+            </div></br>
+            <div class="input">
+              <label for="score">ชั่วโมงกิจกรรม</label>
+              <input type="text" id="score" name="score">
+          </div></br>
+              <button class='button'type="submit">อัพเดท</button><a class="button" href="/EditDashboardadmin">ย้อนกลับ</a>
+          </form>
+      </section>
+
+</body>
+</html>
